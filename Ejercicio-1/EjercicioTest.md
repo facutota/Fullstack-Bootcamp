@@ -23,12 +23,12 @@ https://github.com/facutota/Fullstack-Bootcamp/tree/main/Ejercicio-0
 ## Valores validos e invalidos permitidos en el Form
 |   Campo |   Tipo    | Valor valido  | Valor invalido | Validaciones |
 |---------|-----------|---------------|----------------|--------------|          
-| Nombre  | TextField |Cualquier valor|Campo Vacio     |              |
-| Apellido| TextField |Cualquier valor|Campo Vacio     |              |
-| Email   | TextField |Cualquier valor|Campo Vacio     |              |
+| Nombre  | TextField |Cualquier valor|Campo Vacio     |N/A           |
+| Apellido| TextField |Cualquier valor|Campo Vacio     |N/A           |
+| Email   | TextField |Cualquier valor|Campo Vacio     |Verifica que este el arroba y el dominio valido|
 | Fecha   | Calendar  |Date           |Cualquier valor que no sea un numero - campos vacios|N/A|
 | Pais Residencia|Dropdown List|Valor seleccionado de la lista|Campo Vacio|N/A|
 
 ## Exploracion del Formulario - Verificar que NVDA funcione y que el TAB recorra el formulario.
 
-Al usar sistema Linux se hizo una prueba con el lector de pantalla ORCA el cual funciono perfectamente en el formulario. A su vez el TAB recorrio todo el formulario de arriba hacia abajo y con el Shift + TAB se pudo regresar de abajo hacia arriba.
+Como uso el sistema Linux, busque una alternativa al Lector NVDA por la cual utilice el lector de pantalla ORCA, la prueba con este lector dio como resultado que pudo leer todo el formulario, por lo que ha sido validado que el Form cumple con el lector de pantalla. A su vez el TAB recorrio todo el formulario de arriba hacia abajo y con el Shift + TAB se pudo regresar de abajo hacia arriba.
