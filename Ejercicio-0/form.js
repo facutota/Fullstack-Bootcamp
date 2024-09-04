@@ -1,16 +1,46 @@
 const form = document.querySelector('form');
 const emailInput = document.getElementById('email');
+const nameInput = document.getElementById('nombre');
+const lastNameInput = document.getElementById('apellido');
+const dobInput = document.getElementById('fecha-nacimiento');
 const themeToggleButton = document.getElementById('theme-toggle');
 const body = document.body;
 
 // Expresión regular para validar el email
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// Validación del email al enviar el formulario
+// Validación del formulario al enviar
 form.addEventListener('submit', (event) => {
-    // Si el email no coincide con el patrón, muestra un error y previene el envío
+    let valid = true;
+    let errorMessage = '';
+
+    // Validación del nombre
+    if (nameInput.value.trim() === '') {
+        valid = false;
+        errorMessage += 'Por favor, ingresa tu nombre.\n';
+    }
+
+    // Validación del apellido
+    if (lastNameInput.value.trim() === '') {
+        valid = false;
+        errorMessage += 'Por favor, ingresa tu apellido.\n';
+    }
+
+    // Validación de la fecha de nacimiento
+    if (dobInput.value === '') {
+        valid = false;
+        errorMessage += 'Por favor, selecciona tu fecha de nacimiento.\n';
+    }
+
+    // Validación del email
     if (!emailPattern.test(emailInput.value)) {
-        alert('Por favor, ingresa un email válido.');
+        valid = false;
+        errorMessage += 'Por favor, ingresa un email válido.\n';
+    }
+
+    // Si alguna validación falla, muestra un mensaje de error y previene el envío
+    if (!valid) {
+        alert(errorMessage);
         event.preventDefault(); // Previene el envío del formulario
     }
 });
@@ -24,5 +54,3 @@ themeToggleButton.addEventListener('click', () => {
         themeToggleButton.textContent = 'Cambiar a tema oscuro';
     }
 });
-
-
