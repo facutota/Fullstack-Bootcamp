@@ -1,54 +1,56 @@
-const form = document.querySelector('form');
-const emailInput = document.getElementById('email');
-const nameInput = document.getElementById('nombre');
-const lastNameInput = document.getElementById('apellido');
-const dobInput = document.getElementById('fecha-nacimiento');
+(function () {
+    'use strict';
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    });
+})();
+
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('.needs-validation');
+    const fechaNacimiento = document.getElementById('fecha-nacimiento');
+
+    // Establecer la fecha máxima como hoy
+    const hoy = new Date().toISOString().split('T')[0];
+    fechaNacimiento.setAttribute('max', hoy);
+
+    // Validar el formulario en el envío
+    form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        form.classList.add('was-validated');
+    }, false);
+
+    // Validar la fecha de nacimiento en tiempo real
+    fechaNacimiento.addEventListener('input', function() {
+        const fechaSeleccionada = new Date(this.value);
+        const fechaActual = new Date();
+        
+        if (fechaSeleccionada > fechaActual) {
+            this.setCustomValidity('La fecha no puede ser posterior a hoy');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+});
+
+// Código para el cambio de tema (sin cambios)
 const themeToggleButton = document.getElementById('theme-toggle');
 const body = document.body;
 
-// Expresión regular para validar el email
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-// Validación del formulario al enviar
-form.addEventListener('submit', (event) => {
-    let valid = true;
-    let errorMessage = '';
-
-    // Validación del nombre
-    if (nameInput.value.trim() === '') {
-        valid = false;
-        errorMessage += 'Por favor, ingresa tu nombre.\n';
-    }
-
-    // Validación del apellido
-    if (lastNameInput.value.trim() === '') {
-        valid = false;
-        errorMessage += 'Por favor, ingresa tu apellido.\n';
-    }
-
-    // Validación de la fecha de nacimiento
-    if (dobInput.value === '') {
-        valid = false;
-        errorMessage += 'Por favor, selecciona tu fecha de nacimiento.\n';
-    }
-
-    // Validación del email
-    if (!emailPattern.test(emailInput.value)) {
-        valid = false;
-        errorMessage += 'Por favor, ingresa un email válido.\n';
-    }
-
-    // Si alguna validación falla, muestra un mensaje de error y previene el envío
-    if (!valid) {
-        alert(errorMessage);
-        event.preventDefault(); // Previene el envío del formulario
-    }
-});
-
-// Lógica para cambiar de tema 
 themeToggleButton.addEventListener('click', () => {
-    body.classList.toggle('dark-theme');
-    if (body.classList.contains('dark-theme')) {
+    body.classList.toggle('bg-dark');
+    body.classList.toggle('text-light');
+    if (body.classList.contains('bg-dark')) {
         themeToggleButton.textContent = 'Cambiar a tema claro';
     } else {
         themeToggleButton.textContent = 'Cambiar a tema oscuro';
